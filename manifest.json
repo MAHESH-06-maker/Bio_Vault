@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Bio_Vault",
+  "version": "1.0",
+
+  "permissions": ["storage"],
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "models/*",
+        "face-api.min.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

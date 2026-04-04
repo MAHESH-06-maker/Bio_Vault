@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Face Login</title>
+
+<script src="face-api.min.js"></script>
+<script defer src="camera.js"></script>
+<style>
+body { font-family: Arial; background:white; color:black; text-align:center; }
+video { width:300px; border:2px solid #444; border-radius:10px; transform: scaleX(-1);}
+input,button { padding:10px; margin:10px; }
+</style>
+
+</head>
+
+<body>
+
+<h2>Face Login System</h2>
+<p id="status">Loading models...</p>
+
+<video id="video" autoplay muted></video><br>
+
+<input type="text" id="name" placeholder="Enter your name"><br>
+
+<button id="registerBtn">Register Face</button>
+<button id="loginBtn" disabled>Login</button>
+
+
+</body>
+</html>
