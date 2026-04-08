@@ -1,31 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Face Login</title>
+  <meta charset="UTF-8">
+  <title>Face Login - Bio_Vault</title>
+  <script src="face-api.min.js"></script>
+  <script defer src="camera.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<script src="face-api.min.js"></script>
-<script defer src="camera.js"></script>
-<style>
-body { font-family: Arial; background:white; color:black; text-align:center; }
-video { width:300px; border:2px solid #444; border-radius:10px; transform: scaleX(-1);}
-input,button { padding:10px; margin:10px; }
-</style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #4a4a4a;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    #status {
+      font-size: 15px;
+      margin: 15px 0;
+      min-height: 22px;
+      font-weight: 500;
+    }
+
+    video {
+      width: 100%;
+      max-width: 320px;
+      border: 5px solid #4a4a4a;
+      border-radius: 16px;
+      transform: scaleX(-1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      margin: 15px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 12px 0;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #registerBtn {
+      background: #4a4a4a;
+      color: white;
+    }
+
+    #registerBtn:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+
+    #loginBtn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #loginBtn:hover:not(:disabled) {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    #loginBtn:disabled {
+      background: #cccccc;
+      color: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>Face Login System</h2>
-<p id="status">Loading models...</p>
+  <div class="container">
+    <h2>Face Login</h2>
+    <p class="subtitle">Bio_Vault • Secure Face Authentication</p>
+    
+    <p id="status">Loading models...</p>
 
-<video id="video" autoplay muted></video><br>
+    <video id="video" autoplay muted></video>
 
-<input type="text" id="name" placeholder="Enter your name"><br>
+    <input type="text" id="name" placeholder="Enter Username as same from account">
 
-<button id="registerBtn">Register Face</button>
-<button id="loginBtn" disabled>Login</button>
+    <button id="registerBtn">Register Face</button>
+    <button id="loginBtn" disabled>Login with Face</button>
 
+    <div class="footer">
+      Look directly at the camera
+    </div>
+  </div>
 
 </body>
 </html>

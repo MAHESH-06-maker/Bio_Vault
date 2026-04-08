@@ -1,20 +1,114 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FaceLock</title>
-  <style>
-    body { width:200px; text-align:center; font-family:Arial; }
-    button { padding:10px; margin-top:20px; width:100%; }
-  </style>
 
-  <!-- ✅ use defer -->
-  <script defer src="popup.js"></script>
+<head>
+  <title>Bio_Vault</title>
+  <style>
+    body {
+      width: 320px;
+      padding: 15px;
+      font-family: Arial;
+      text-align: center;
+      background: #f8f9fa;
+    }
+
+    h2 {
+      margin: 10px 0 20px;
+      color: #333;
+    }
+
+    button {
+      padding: 12px;
+      margin: 8px 0;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .primary-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #2196F3;
+      color: white;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .section {
+      margin-top: 15px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h3>FaceLock</h3>
-<button id="startBtn">Start Face Login</button>
+  <h2>Bio_Vault</h2>
 
+  <!-- Main Screen -->
+  <!-- Main Screen -->
+  <div id="mainScreen">
+    <button id="savePasswordBtn" class="primary-btn">Save Password</button>
+    <button id="accessPasswordBtn" class="secondary-btn">Access Password</button>
+
+    <!-- New Register Link using <a> tag -->
+    <a id="registerLink" href="#"
+      style="display:block; margin:15px 0; color:#9C27B0; text-decoration:none; font-size:15px;">
+      New User ? Register
+    </a>
+  </div>
+
+  <!-- Save Password Screen -->
+  <div id="saveScreen" class="hidden section">
+    <h3>Save Credential</h3>
+    <input type="text" id="domain" placeholder="Domain / Website" />
+    <input type="text" id="username" placeholder="Username / Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="saveCredentialBtn" class="primary-btn">Save</button>
+    <button id="backToMainFromSave" class="secondary-btn">Back</button>
+  </div>
+
+  <!-- Access Password Screen -->
+  <div id="accessScreen" class="hidden section">
+    <h3>Access Vault</h3>
+    <button id="masterLoginBtn" class="primary-btn">Login with Master Password</button>
+
+    <div id="masterLoginForm" class="hidden">
+      <input type="password" id="masterPassword" placeholder="Master Password" />
+      <button id="submitMasterPassword" class="primary-btn">Login</button>
+    </div>
+    <p>OR</p>
+    <button id="faceLockBtn" class="secondary-btn">Login with Face Lock</button>
+    <button id="backToMainFromAccess" class="secondary-btn">Back</button>
+  </div>
++
+  <!-- Register Screen (Forced if no account) -->
+  <div id="registerScreen" class="hidden section">
+    <h3>Create Your Account</h3>
+    <input type="text" id="regUsername" placeholder="Username" />
+    <input type="password" id="regMasterPassword" placeholder="Set Master Password" />
+    <input type="password" id="regConfirmPassword" placeholder="Confirm Password" />
+    <button id="registerFaceBtn" class="secondary-btn">Register Face</button>
+    <button id="createAccountBtn" class="primary-btn">Create Account</button>
+    <button id="backToMainFromAccount" class="secondary-btn">Back</button>
+  </div>
+
+  <script defer src="popup.js"></script>
 </body>
+
 </html>

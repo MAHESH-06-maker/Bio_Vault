@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
-
-<style>
-body { background:#111; color:white; text-align:center; font-family:Arial; }
-button { padding:10px; margin:10px; }
-input { padding:8px; margin:10px; }
-</style>
-
-<script defer src="HomePage.js"></script>
-
+  <meta charset="UTF-8">
+  <title>Home - Bio_Vault</title>
+  <style>
+    body { background:#111; color:white; font-family:Arial; padding:15px; }
+    table { width:100%; border-collapse:collapse; margin:20px 0; }
+    th, td { padding:10px; border:1px solid #444; text-align:left; }
+    .eye { cursor:pointer; margin-left:8px; }
+  </style>
+  <script defer src="HomePage.js"></script>
 </head>
-
 <body>
+  <h2>Welcome, <span id="username"></span></h2>
 
-<h2>Welcome</h2>
-<h3 id="username"></h3>
+  <h3>Add New Credential</h3>
+  <input type="text" id="newDomain" placeholder="Domain">
+  <input type="text" id="newUser" placeholder="Username">
+  <input type="password" id="newPass" placeholder="Password">
+  <button id="addCredBtn">Add Credential</button>
 
-<input type="text" id="deleteName" placeholder="Enter name to delete">
+  <h3>Saved Credentials</h3>
+  <table id="credTable">
+    <thead><tr><th>Domain</th><th>Username</th><th>Password</th><th>Action</th></tr></thead>
+    <tbody></tbody>
+  </table>
 
-<!-- ❌ removed onclick -->
-<button id="deleteBtn">Delete User</button>
-<button id="logoutBtn">Logout</button>
-
+  <select id="deleteDropdown" style="padding:10px; margin:10px 0; width:100%; font-size:15px;">
+  <option value="">Choose Action...</option>
+  <option value="face">Delete Face Only</option>
+  <option value="account">Delete Entire Account</option>
+</select>
+  <button id="logoutBtn">Logout</button>
 </body>
 </html>
