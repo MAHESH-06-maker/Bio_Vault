@@ -1,114 +1,199 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Bio_Vault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    *{
+      font-family: 'Orbitron', sans-serif;
+    }
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --panel-bg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --border: #d1d5db;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+
     body {
-      width: 320px;
-      padding: 15px;
-      font-family: Arial;
-      text-align: center;
-      background: #f8f9fa;
+      width: 340px;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .app-container {
+      background: var(--panel-bg);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, 0.7);
     }
 
     h2 {
-      margin: 10px 0 20px;
-      color: #333;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+  text-align: center;
+
+  /* Gradient text */
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Glow effect */
+  text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+}
+    h3 { font-size: 16px; color: var(--text-light); font-weight: 500; margin-top: 0; }
+
+    /* --- Password Field Styles --- */
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
     }
 
-    button {
-      padding: 12px;
-      margin: 8px 0;
-      width: 100%;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
+    .password-wrapper input {
+      margin-bottom: 0; /* Override default margin */
+      padding-right: 40px; /* Space for the icon */
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
       cursor: pointer;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 0;
+      width: auto;
+      margin: 0;
     }
 
-    .primary-btn {
-      background: #4CAF50;
-      color: white;
-    }
+    .toggle-password:hover { color: var(--accent); }
 
-    .secondary-btn {
-      background: #2196F3;
-      color: white;
-    }
-
+    /* --- Standard Styles --- */
     input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      padding: 12px 14px;
+      margin: 6px 0 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
       box-sizing: border-box;
+      transition: all 0.2s ease;
     }
 
-    .hidden {
-      display: none;
+    input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .section {
-      margin-top: 15px;
-    }
+    .primary-btn { background: var(--accent); color: white; }
+    .secondary-btn { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+    .back-btn { background: transparent; color: var(--text-light); font-size: 13px; }
+
+    .divider { display: flex; align-items: center; margin: 15px 0; color: var(--text-light); font-size: 12px; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; margin: 0 10px; }
+
+    .register-link { display: block; text-align: center; margin-top: 15px; font-size: 13px; color: var(--accent); text-decoration: none; font-weight: 500; }
+    .hidden { display: none !important; }
+    .section { animation: slideUp 0.3s ease-out; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 
 <body>
+  <div class="app-container">
+    <h2>BioVault</h2>
 
-  <h2>Bio_Vault</h2>
-
-  <!-- Main Screen -->
-  <!-- Main Screen -->
-  <div id="mainScreen">
-    <button id="savePasswordBtn" class="primary-btn">Save Password</button>
-    <button id="accessPasswordBtn" class="secondary-btn">Access Password</button>
-
-    <!-- New Register Link using <a> tag -->
-    <a id="registerLink" href="#"
-      style="display:block; margin:15px 0; color:#9C27B0; text-decoration:none; font-size:15px;">
-      New User ? Register
-    </a>
-  </div>
-
-  <!-- Save Password Screen -->
-  <div id="saveScreen" class="hidden section">
-    <h3>Save Credential</h3>
-    <input type="text" id="domain" placeholder="Domain / Website" />
-    <input type="text" id="username" placeholder="Username / Email" />
-    <input type="password" id="password" placeholder="Password" />
-    <button id="saveCredentialBtn" class="primary-btn">Save</button>
-    <button id="backToMainFromSave" class="secondary-btn">Back</button>
-  </div>
-
-  <!-- Access Password Screen -->
-  <div id="accessScreen" class="hidden section">
-    <h3>Access Vault</h3>
-    <button id="masterLoginBtn" class="primary-btn">Login with Master Password</button>
-
-    <div id="masterLoginForm" class="hidden">
-      <input type="password" id="masterPassword" placeholder="Master Password" />
-      <button id="submitMasterPassword" class="primary-btn">Login</button>
+    <div id="mainScreen" class="section">
+      <button id="savePasswordBtn" class="primary-btn">Save Password</button>
+      <div class="divider">OR</div>
+      <button id="accessPasswordBtn" class="secondary-btn">Access Vault</button>
+      <a id="registerLink" href="#" class="register-link">New User? Create Account</a>
     </div>
-    <p>OR</p>
-    <button id="faceLockBtn" class="secondary-btn">Login with Face Lock</button>
-    <button id="backToMainFromAccess" class="secondary-btn">Back</button>
-  </div>
-+
-  <!-- Register Screen (Forced if no account) -->
-  <div id="registerScreen" class="hidden section">
-    <h3>Create Your Account</h3>
-    <input type="text" id="regUsername" placeholder="Username" />
-    <input type="password" id="regMasterPassword" placeholder="Set Master Password" />
-    <input type="password" id="regConfirmPassword" placeholder="Confirm Password" />
-    <button id="registerFaceBtn" class="secondary-btn">Register Face</button>
-    <button id="createAccountBtn" class="primary-btn">Create Account</button>
-    <button id="backToMainFromAccount" class="secondary-btn">Back</button>
+
+    <div id="saveScreen" class="hidden section">
+      <h3>Add New Credential</h3>
+      <input type="text" id="domain" placeholder="Domain (e.g. google.com)" />
+      <input type="text" id="username" placeholder="Email / Username" />
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" />
+        <button type="button" class="toggle-password" data-target="password">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+      <button id="saveCredentialBtn" class="primary-btn">Save Securely</button>
+      <button id="backToMainFromSave" class="back-btn">Back to Home</button>
+    </div>
+
+    <div id="accessScreen" class="hidden section">
+      <h3>Unlock Vault</h3>
+      <button id="masterLoginBtn" class="primary-btn">Master Password</button>
+      <div id="masterLoginForm" class="hidden">
+        <div class="password-wrapper" style="margin-top:10px;">
+          <input type="password" id="masterPassword" placeholder="Enter Master Password" />
+          <button type="button" class="toggle-password" data-target="masterPassword">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+        <button id="submitMasterPassword" class="primary-btn">Unlock</button>
+      </div>
+      <div class="divider">OR</div>
+      <button id="faceLockBtn" class="secondary-btn">Face Lock Login</button>
+      <button id="backToMainFromAccess" class="back-btn">Back</button>
+    </div>
+
+    <div id="registerScreen" class="hidden section">
+      <h3>Account Setup</h3>
+      <input type="text" id="regUsername" placeholder="Username" />
+      <div class="password-wrapper">
+        <input type="password" id="regMasterPassword" placeholder="Set Master Password" />
+        <button type="button" class="toggle-password" data-target="regMasterPassword">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+      <div class="password-wrapper">
+        <input type="password" id="regConfirmPassword" placeholder="Confirm Password" />
+        <button type="button" class="toggle-password" data-target="regConfirmPassword">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+      <button id="registerFaceBtn" class="secondary-btn">Set Up Face Lock</button>
+      <button id="createAccountBtn" class="primary-btn">Create Vault</button>
+      <button id="backToMainFromAccount" class="back-btn">Back to Login</button>
+    </div>
   </div>
 
   <script defer src="popup.js"></script>
 </body>
-
 </html>

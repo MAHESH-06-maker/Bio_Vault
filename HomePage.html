@@ -1,36 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Home - Bio_Vault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { background:#111; color:white; font-family:Arial; padding:15px; }
-    table { width:100%; border-collapse:collapse; margin:20px 0; }
-    th, td { padding:10px; border:1px solid #444; text-align:left; }
-    .eye { cursor:pointer; margin-left:8px; }
+   /* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+/* Theme */
+:root {
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --panel-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Body */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Main container */
+.app {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Title */
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+/* Section titles */
+h3 {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 8px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Primary */
+#addCredBtn {
+  background: var(--accent);
+  color: white;
+}
+
+/* Logout */
+#logoutBtn {
+  background: #f1f5f9;
+  color: #475569;
+  margin-top: 10px;
+}
+
+/* Credential list (modern instead of table) */
+.cred-item {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+
+.cred-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.cred-domain {
+  font-weight: 600;
+}
+
+.cred-user {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.cred-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password {
+  font-size: 13px;
+}
+
+.eye {
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+/* Delete button */
+.deleteCred {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  width: auto;
+}
+
+/* Dropdown */
+#deleteDropdown {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-top: 10px;
+}
   </style>
   <script defer src="HomePage.js"></script>
 </head>
+
 <body>
+<div class="app">
+
   <h2>Welcome, <span id="username"></span></h2>
 
-  <h3>Add New Credential</h3>
-  <input type="text" id="newDomain" placeholder="Domain">
-  <input type="text" id="newUser" placeholder="Username">
-  <input type="password" id="newPass" placeholder="Password">
-  <button id="addCredBtn">Add Credential</button>
+  <div class="card">
+    <h3>Add New Credential</h3>
+    <input type="text" id="newDomain" placeholder="Domain">
+    <input type="text" id="newUser" placeholder="Username">
+    <input type="password" id="newPass" placeholder="Password">
+    <button id="addCredBtn">Add Credential</button>
+  </div>
 
-  <h3>Saved Credentials</h3>
-  <table id="credTable">
-    <thead><tr><th>Domain</th><th>Username</th><th>Password</th><th>Action</th></tr></thead>
-    <tbody></tbody>
-  </table>
+  <div class="card">
+    <h3>Saved Credentials</h3>
+    <div id="credList"></div>
+  </div>
 
-  <select id="deleteDropdown" style="padding:10px; margin:10px 0; width:100%; font-size:15px;">
-  <option value="">Choose Action...</option>
-  <option value="face">Delete Face Only</option>
-  <option value="account">Delete Entire Account</option>
-</select>
-  <button id="logoutBtn">Logout</button>
+  <div class="card">
+    <select id="deleteDropdown">
+      <option value="">Choose Action...</option>
+      <option value="face">Delete Face Only</option>
+      <option value="account">Delete Entire Account</option>
+    </select>
+
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+</div>
 </body>
+
 </html>

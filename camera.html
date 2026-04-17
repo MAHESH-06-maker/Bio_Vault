@@ -1,126 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Face Login - Bio_Vault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet">
   <script src="face-api.min.js"></script>
   <script defer src="camera.js"></script>
   <style>
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
     }
 
+    /* Theme Variables (same as popup) */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --panel-bg: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.1);
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --border: #d1d5db;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+
+    /* Body */
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    /* Container */
+    .container {
+      background: var(--panel-bg);
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
       text-align: center;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      color: #333;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 420px;
-    }
-
+    /* Title */
     h2 {
-      margin-bottom: 10px;
-      color: #4a4a4a;
-      font-size: 28px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+
+      background: linear-gradient(90deg, #2563eb, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
     }
 
+    /* Subtitle */
     .subtitle {
-      color: #666;
-      margin-bottom: 25px;
-      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
+    /* Status */
     #status {
-      font-size: 15px;
-      margin: 15px 0;
-      min-height: 22px;
+      font-size: 14px;
+      margin: 12px 0;
+      min-height: 20px;
       font-weight: 500;
     }
 
-    video {
-      width: 100%;
-      max-width: 320px;
-      border: 5px solid #4a4a4a;
-      border-radius: 16px;
-      transform: scaleX(-1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      margin: 15px 0;
-    }
+.video-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
 
+video {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 16px;
+  margin: 15px 0;
+
+  border: 2px solid var(--border);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+
+  transform: scaleX(-1);
+}
+
+/* Scanner line */
+.scanner {
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  top: 50%;
+  left: 10%;
+  background: linear-gradient(90deg, transparent, #2563eb, transparent);
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-120px); }
+  100% { transform: translateY(120px); }
+}
+
+    /* Inputs */
     input {
       width: 100%;
-      padding: 14px 16px;
-      margin: 12px 0;
-      border: 2px solid #ddd;
+      padding: 12px 14px;
+      margin: 10px 0;
+      border: 1.5px solid var(--border);
       border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-      transition: all 0.3s;
+      font-size: 14px;
+      transition: all 0.2s ease;
     }
 
     input:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
     }
 
+    /* Buttons */
     button {
       width: 100%;
       padding: 14px;
-      margin: 10px 0;
+      margin: 8px 0;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
+      border-radius: var(--radius);
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s ease;
     }
 
-    #registerBtn {
-      background: #4a4a4a;
-      color: white;
-    }
-
-    #registerBtn:hover {
-      background: #333;
-      transform: translateY(-2px);
-    }
-
+    /* Primary */
     #loginBtn {
-      background: #4CAF50;
+      background: var(--accent);
       color: white;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
     #loginBtn:hover:not(:disabled) {
-      background: #45a049;
-      transform: translateY(-2px);
+      background: #1d4ed8;
     }
 
+    /* Secondary */
+    #registerBtn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    #registerBtn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Disabled */
     #loginBtn:disabled {
-      background: #cccccc;
-      color: #666;
+      background: #cbd5f5;
       cursor: not-allowed;
-      transform: none;
+      box-shadow: none;
     }
 
+    /* Footer */
     .footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #888;
+      margin-top: 15px;
+      font-size: 12px;
+      color: var(--text-light);
     }
   </style>
 </head>
@@ -129,11 +188,15 @@
 
   <div class="container">
     <h2>Face Login</h2>
-    <p class="subtitle">Bio_Vault • Secure Face Authentication</p>
-    
+    <p class="subtitle">BioVault — Secure Face Authentication</p>
+
     <p id="status">Loading models...</p>
 
-    <video id="video" autoplay muted></video>
+    <div class="video-wrapper">
+      <video id="video" autoplay muted></video>
+      <div class="scanner"></div>
+    </div>
+
 
     <input type="text" id="name" placeholder="Enter Username as same from account">
 
@@ -146,4 +209,5 @@
   </div>
 
 </body>
+
 </html>

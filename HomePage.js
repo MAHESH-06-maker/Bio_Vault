@@ -4,24 +4,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById('username').textContent = account?.username || loggedUser;
 
-  const tbody = document.querySelector("#credTable tbody");
+const list = document.getElementById("credList");
 
-  function renderTable(creds) {
-    tbody.innerHTML = "";
-    creds.forEach((cred, index) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${cred.domain}</td>
-        <td>${cred.username}</td>
-        <td>
-          <span class="password" data-index="${index}">••••••••</span>
-          <span class="eye" data-index="${index}">👁</span>
-        </td>
-        <td><button data-index="${index}" class="deleteCred">Delete</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
+function renderTable(creds) {
+  list.innerHTML = "";
+
+  creds.forEach((cred, index) => {
+    const div = document.createElement('div');
+    div.className = "cred-item";
+
+    div.innerHTML = `
+      <div class="cred-top">
+        <span class="cred-domain">${cred.domain}</span>
+        <button class="deleteCred" data-index="${index}">Delete</button>
+      </div>
+
+      <div class="cred-user">${cred.username}</div>
+
+      <div class="cred-bottom">
+        <span class="password" data-index="${index}">••••••••</span>
+        <span class="eye" data-index="${index}">👁</span>
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+}
 
   renderTable(credentials);
 
@@ -41,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   // Toggle Password
-  tbody.addEventListener('click', async (e) => {
+  list.addEventListener('click', async (e) => {
     if (e.target.classList.contains('eye')) {
       const index = parseInt(e.target.dataset.index);
       const { credentials } = await storage.get('credentials');
@@ -85,7 +93,7 @@ deleteDropdown.addEventListener('change', async () => {
     }
   } 
   else if (choice === 'account') {
-    if (confirm("⚠️ Delete entire account and ALL data permanently?")) {
+    if (confirm(" Delete entire account and ALL data permanently?")) {
       await chrome.storage.local.clear();
       alert("Entire account deleted!");
       window.location.href = chrome.runtime.getURL("popup.html");
