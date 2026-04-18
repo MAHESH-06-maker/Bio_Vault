@@ -1,15 +1,14 @@
+<!-- camera.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <title>Face Login - Bio_Vault</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="face-api.min.js"></script>
   <script defer src="camera.js"></script>
   <style>
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -17,7 +16,6 @@
       font-family: 'Orbitron', sans-serif;
     }
 
-    /* Theme Variables (same as popup) */
     :root {
       --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
       --panel-bg: #ffffff;
@@ -30,7 +28,6 @@
       --radius: 12px;
     }
 
-    /* Body */
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg-gradient);
@@ -41,7 +38,6 @@
       justify-content: center;
     }
 
-    /* Container */
     .container {
       background: var(--panel-bg);
       padding: 28px;
@@ -53,28 +49,23 @@
       text-align: center;
     }
 
-    /* Title */
     h2 {
       font-family: 'Orbitron', sans-serif;
       font-size: 26px;
       letter-spacing: 1.5px;
       margin-bottom: 6px;
-
       background: linear-gradient(90deg, #2563eb, #06b6d4);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
       text-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
     }
 
-    /* Subtitle */
     .subtitle {
       color: var(--text-light);
       margin-bottom: 20px;
       font-size: 14px;
     }
 
-    /* Status */
     #status {
       font-size: 14px;
       margin: 12px 0;
@@ -82,41 +73,37 @@
       font-weight: 500;
     }
 
-.video-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
+    .video-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
 
-video {
-  width: 100%;
-  max-width: 320px;
-  border-radius: 16px;
-  margin: 15px 0;
+    video {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      margin: 15px 0;
+      border: 2px solid var(--border);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      transform: scaleX(-1);
+    }
 
-  border: 2px solid var(--border);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+    .scanner {
+      position: absolute;
+      width: 80%;
+      height: 2px;
+      top: 50%;
+      left: 10%;
+      background: linear-gradient(90deg, transparent, #2563eb, transparent);
+      animation: scan 2s linear infinite;
+    }
 
-  transform: scaleX(-1);
-}
+    @keyframes scan {
+      0%   { transform: translateY(-120px); }
+      100% { transform: translateY(120px); }
+    }
 
-/* Scanner line */
-.scanner {
-  position: absolute;
-  width: 80%;
-  height: 2px;
-  top: 50%;
-  left: 10%;
-  background: linear-gradient(90deg, transparent, #2563eb, transparent);
-  animation: scan 2s linear infinite;
-}
-
-@keyframes scan {
-  0% { transform: translateY(-120px); }
-  100% { transform: translateY(120px); }
-}
-
-    /* Inputs */
     input {
       width: 100%;
       padding: 12px 14px;
@@ -125,6 +112,7 @@ video {
       border-radius: 10px;
       font-size: 14px;
       transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
     }
 
     input:focus {
@@ -133,7 +121,6 @@ video {
       box-shadow: 0 0 0 4px var(--accent-soft);
     }
 
-    /* Buttons */
     button {
       width: 100%;
       padding: 14px;
@@ -144,38 +131,34 @@ video {
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    /* Primary */
     #loginBtn {
       background: var(--accent);
       color: white;
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    #loginBtn:hover:not(:disabled) {
-      background: #1d4ed8;
-    }
+    #loginBtn:hover:not(:disabled) { background: #1d4ed8; }
 
-    /* Secondary */
     #registerBtn {
       background: #f1f5f9;
       color: #475569;
       border: 1px solid #e2e8f0;
     }
 
-    #registerBtn:hover {
-      background: #e2e8f0;
-    }
+    #registerBtn:hover { background: #e2e8f0; }
 
-    /* Disabled */
     #loginBtn:disabled {
       background: #cbd5f5;
       cursor: not-allowed;
       box-shadow: none;
     }
 
-    /* Footer */
+    /* Hide name input — face registration is tied to loggedUser / account */
+    #name { display: none; }
+
     .footer {
       margin-top: 15px;
       font-size: 12px;
@@ -185,7 +168,6 @@ video {
 </head>
 
 <body>
-
   <div class="container">
     <h2>Face Login</h2>
     <p class="subtitle">BioVault — Secure Face Authentication</p>
@@ -197,17 +179,13 @@ video {
       <div class="scanner"></div>
     </div>
 
-
-    <input type="text" id="name" placeholder="Enter Username as same from account">
+    <!-- Hidden — username is read from account/loggedUser, never entered manually -->
+    <input type="text" id="name" placeholder="Username (hidden)" />
 
     <button id="registerBtn">Register Face</button>
     <button id="loginBtn" disabled>Login with Face</button>
 
-    <div class="footer">
-      Look directly at the camera
-    </div>
+    <div class="footer">Look directly at the camera</div>
   </div>
-
 </body>
-
 </html>
