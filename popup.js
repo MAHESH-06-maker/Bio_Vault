@@ -148,13 +148,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       credentials[activeUser].push({ domain, username: siteUsername, password: encryptedPassword });
       await storage.set({ credentials });
 
-      alert("✅ Credential Saved Securely!");
+      alert("Credential Saved Securely!");
       document.getElementById('domain').value       = '';
       document.getElementById('siteUsername').value = '';
       document.getElementById('password').value     = '';
       showScreen(mainScreen);
     } catch (err) {
-      alert("❌ Encryption failed. Please try again.");
+      alert("Encryption failed. Please try again.");
       console.error("Encryption error:", err);
     }
   };
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await storage.set({ accounts: accs, credentials });
 
-    alert("✅ Account created! You can now log in.");
+    alert("Account created! You can now log in.");
 
     // Clear register fields
     document.getElementById('regUsername').value        = '';

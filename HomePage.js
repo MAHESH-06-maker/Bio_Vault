@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       alert("Credential Added Securely!");
     } catch (err) {
       console.error("Encryption error:", err);
-      alert("❌ Failed to save credential.");
+      alert("Failed to save credential.");
     }
   };
 
