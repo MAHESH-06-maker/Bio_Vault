@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BioVault Console</title>
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body class="console-page">
+    <main class="popup-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">BioVault</p>
+          <h1>Vault Console</h1>
+        </div>
+        <button id="open-options" class="ghost-button compact-button" type="button">Settings</button>
+      </header>
+
+      <section id="login-view" class="panel panel-prominent">
+        <div class="panel-header">
+          <h2>Access Vault</h2>
+          <div class="auth-switcher">
+            <button id="show-login" class="secondary-button compact-button hidden" type="button">Back to Login</button>
+            <button id="show-register" class="ghost-button compact-button" type="button">Create Account</button>
+          </div>
+        </div>
+        <div id="login-panel">
+          <form id="login-form" class="stack">
+            <label class="field">
+              <span>Username</span>
+              <input name="username" type="text" autocomplete="username" required>
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input name="password" type="password" autocomplete="current-password" required>
+            </label>
+            <button type="submit" class="primary-button">Unlock Vault</button>
+          </form>
+          <button id="face-unlock-button" class="secondary-button full-width-button hidden" type="button">Unlock with Face</button>
+        </div>
+        <div id="register-panel" class="hidden">
+          <form id="register-form" class="stack">
+            <label class="field">
+              <span>Username</span>
+              <input name="username" type="text" autocomplete="username" required>
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input name="password" type="password" autocomplete="new-password" required>
+            </label>
+            <label class="field">
+              <span>Confirm Password</span>
+              <input name="confirmPassword" type="password" autocomplete="new-password" required>
+            </label>
+            <button type="submit" class="primary-button">Create Vault</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="app-view" class="app-stack hidden">
+        <section class="account-strip">
+          <div>
+            <p class="label">Configured API</p>
+            <p id="api-base-url" class="mono muted"></p>
+          </div>
+          <div>
+            <p class="label">Username</p>
+            <p id="username" class="mono muted"></p>
+          </div>
+          <button id="logout-button" class="danger-button compact-button" type="button">Logout</button>
+        </section>
+
+        <section id="credentials-page" class="panel page-view">
+          <div class="panel-header">
+            <h2>Credentials</h2>
+            <div class="button-row">
+              <button id="toggle-face-unlock" class="ghost-button compact-button" type="button">Enable Face</button>
+              <button id="open-keys-page" class="secondary-button compact-button" type="button">Keys</button>
+              <button id="open-add-credential" class="primary-button compact-button" type="button">Add</button>
+            </div>
+          </div>
+          <ul id="credential-list" class="card-list"></ul>
+        </section>
+
+        <section id="keys-page" class="panel page-view hidden">
+          <div class="panel-header">
+            <h2>Keys</h2>
+            <div class="button-row">
+              <button id="back-from-keys" class="secondary-button compact-button" type="button">Back</button>
+              <button id="refresh-keys" class="ghost-button compact-button" type="button">Reload</button>
+            </div>
+          </div>
+          <ul id="key-list" class="card-list"></ul>
+        </section>
+
+        <section id="credential-form-page" class="panel page-view hidden">
+          <div class="panel-header">
+            <h2 id="credential-form-title">Add Credential</h2>
+            <button id="back-from-credential-form" class="secondary-button compact-button" type="button">Back</button>
+          </div>
+          <form id="credential-form" class="stack">
+            <label class="field">
+              <span>Identifier</span>
+              <input name="identifier" type="text" placeholder="email" required>
+            </label>
+            <label class="field">
+              <span>Domain</span>
+              <input name="domain" type="text" placeholder="example.com">
+            </label>
+            <label class="field">
+              <span>Username</span>
+              <input name="username" type="text" placeholder="alice@example.com" required>
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input name="password" type="text" placeholder="secret" required>
+            </label>
+            <button id="credential-form-submit" type="submit" class="primary-button">Save Credential</button>
+          </form>
+        </section>
+      </section>
+
+      <p id="status" class="status-line" role="status"></p>
+    </main>
+
+    <template id="key-item-template">
+      <li class="card-item card-item-centered">
+        <div class="card-copy">
+          <p class="card-title"></p>
+        </div>
+        <button class="danger-button compact-button delete-key-button" type="button">Delete</button>
+      </li>
+    </template>
+
+    <template id="credential-item-template">
+      <li class="card-item card-item-stacked">
+        <div class="card-copy credential-copy">
+          <p class="card-title"></p>
+          <p class="card-subtitle mono"></p>
+        </div>
+        <div class="button-row wrap">
+          <button class="ghost-button compact-button copy-username-button" type="button">Copy User</button>
+          <button class="ghost-button compact-button copy-password-button" type="button">Copy Pass</button>
+          <button class="secondary-button compact-button edit-credential-button" type="button">Edit</button>
+          <button class="danger-button compact-button delete-credential-button" type="button">Delete</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="vendor/argon2-bundled.min.js"></script>
+    <script src="vendor/nacl-fast.min.js"></script>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

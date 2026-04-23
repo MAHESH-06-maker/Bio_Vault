@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BioVault Biometric</title>
+    <link rel="stylesheet" href="theme.css">
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .shell {
+        width: min(560px, 100%);
+        display: grid;
+        gap: 16px;
+      }
+
+      .card {
+        border: 1px solid rgba(12, 52, 47, 0.14);
+        border-radius: 28px;
+        background: rgba(255, 251, 245, 0.9);
+        box-shadow: 0 12px 30px rgba(27, 34, 32, 0.08);
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      h1, p {
+        margin: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .video {
+        width: 100%;
+        min-height: 260px;
+        border-radius: 20px;
+        background: rgba(13, 58, 52, 0.1);
+        object-fit: cover;
+        transform: scaleX(-1);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .status {
+        min-height: 1.5rem;
+        font-weight: 600;
+        color: var(--accent-deep);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="card">
+        <div class="row">
+          <h1 id="title">Biometric Unlock</h1>
+          <button id="close" class="ghost-button" type="button">Close</button>
+        </div>
+        <p id="description" class="muted"></p>
+        <video id="video" class="video hidden" autoplay muted playsinline></video>
+        <div id="actions" class="actions"></div>
+        <p id="status" class="status" role="status"></p>
+      </section>
+    </main>
+
+    <script src="vendor/nacl-fast.min.js"></script>
+    <script src="vendor/argon2-bundled.min.js"></script>
+    <script src="vendor/face-api.min.js"></script>
+    <script type="module" src="biometric.js"></script>
+  </body>
+</html>

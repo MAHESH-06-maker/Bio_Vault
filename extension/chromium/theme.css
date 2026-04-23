@@ -1,0 +1,109 @@
+:root {
+  color-scheme: light;
+  --bg-top: #f6f2e8;
+  --bg-bottom: #dff0e6;
+  --panel: rgba(255, 249, 241, 0.86);
+  --text: #1a2420;
+  --muted: #536761;
+  --accent: #0f766e;
+  --accent-deep: #0b5b54;
+  --danger: #9b2c2c;
+  --field: rgba(255, 255, 255, 0.9);
+  --field-border: rgba(12, 52, 47, 0.12);
+  --shadow: 0 18px 48px rgba(14, 23, 20, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.76), transparent 32%),
+    linear-gradient(155deg, var(--bg-top), var(--bg-bottom));
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.05rem;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--field-border);
+  border-radius: 16px;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--field);
+  outline: none;
+  transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(15, 118, 110, 0.58);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 16px;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease, opacity 120ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.04);
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.55;
+  transform: none;
+}
+
+.primary-button {
+  color: white;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+}
+
+.secondary-button,
+.ghost-button {
+  color: var(--accent-deep);
+  background: rgba(15, 118, 110, 0.1);
+}
+
+.danger-button {
+  color: white;
+  background: linear-gradient(135deg, #c84c4c, var(--danger));
+}
+
+.mono {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+}
